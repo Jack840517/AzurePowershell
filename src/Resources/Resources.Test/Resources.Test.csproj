@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PsModuleName>Resources</PsModuleName>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)..\..\Az.Test.props" />
+
+  <PropertyGroup>
+    <RootNamespace>$(LegacyAssemblyPrefix)$(PsModuleName)$(AzTestAssemblySuffix)</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Management.Authorization" Version="2.13.0-preview" />
+    <PackageReference Include="Microsoft.Azure.Management.ManagementGroups" Version="1.1.1-preview" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ResourceManager\ResourceManager.csproj" />
+    <ProjectReference Include="..\Resources\Resources.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\*.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="*.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="*.bicep" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="ScenarioTests\*.pfx" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.Azure.Management.ResourceManager" Version="3.15.1-preview" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.9.0" />
+  </ItemGroup>
+</Project>
